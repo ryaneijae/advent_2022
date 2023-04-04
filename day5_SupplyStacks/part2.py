@@ -43,10 +43,15 @@ def implement_instructions(original_state, instructions):
         move_from = i[1]
         move_to = i[2]
         move_number = i[0]
+        temp_stack = []
         for j in range(move_number):
-            state[move_to - 1].append(state[move_from - 1].pop())
+            temp_stack.append(state[move_from - 1].pop())
     
+        for j in range(move_number):
+            state[move_to - 1].append(temp_stack.pop())
+
     return state
+
 
 def main(argv):
     final_state = implement_instructions(
