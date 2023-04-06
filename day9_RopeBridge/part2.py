@@ -35,7 +35,6 @@ def tail_change(head_x, head_y, tail_x, tail_y):
                 tail_x += int((head_x - tail_x) / 2)
                 tail_y += int((head_y - tail_y) / 2)
 
-
     return tail_x, tail_y
 
 
@@ -44,7 +43,9 @@ def simulate_movement(movement):
     head_x = 0
     head_y = 0
     head_location.append((head_x, head_y))
-    
+   
+    knot_1_x = 0
+    knot_1_y = 0
     knot_2_x = 0
     knot_2_y = 0
     knot_3_x = 0
@@ -68,7 +69,8 @@ def simulate_movement(movement):
     for instruction in movement:
         for i in range(int(instruction[1])):
             head_x, head_y = head_change(instruction[0], head_x, head_y)
-            knot_2_x, knot_2_y = tail_change(head_x, head_y, knot_2_x, knot_2_y)
+            knot_1_x, knot_1_y = tail_change(head_x, head_y, knot_1_x, knot_1_y)
+            knot_2_x, knot_2_y = tail_change(knot_1_x, knot_1_y, knot_2_x, knot_2_y)
             knot_3_x, knot_3_y = tail_change(knot_2_x, knot_2_y, knot_3_x, knot_3_y)
             knot_4_x, knot_4_y = tail_change(knot_3_x, knot_3_y, knot_4_x, knot_4_y)
             knot_5_x, knot_5_y = tail_change(knot_4_x, knot_4_y, knot_5_x, knot_5_y)
@@ -79,6 +81,17 @@ def simulate_movement(movement):
 
             head_location.append((head_x, head_y))
             tail_location.append((tail_x, tail_y))
+
+    print(f"head: {head_x}, {head_y}")
+    print(f"2: {knot_2_x}, {knot_2_y}")
+    print(f"3: {knot_3_x}, {knot_3_y}")
+    print(f"4: {knot_4_x}, {knot_4_y}")
+    print(f"5: {knot_5_x}, {knot_5_y}")
+    print(f"6: {knot_6_x}, {knot_6_y}")
+    print(f"7: {knot_7_x}, {knot_7_y}")
+    print(f"8: {knot_8_x}, {knot_8_y}")
+    print(f"tail: {tail_x}, {tail_y}")
+
     
     return head_location, tail_location
 
